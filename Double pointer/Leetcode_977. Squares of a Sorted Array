@@ -1,0 +1,56 @@
+
+--- Violent Solution ---
+
+class Solution {
+    public int[] sortedSquares(int[] nums) {
+        for(int i = 0; i < nums.length; i++){
+            nums[i] = nums[i] * nums[i];
+        }
+        boolean swapped;
+        for(int i = 0; i < nums.length - 1 ; i++){
+            swapped = false;
+            for(int j = 0; j < nums.length - 1 - i; j++){
+                if(nums[j] > nums[j+1]){
+                    int temp = nums[j];
+                    nums[j] = nums[j + 1];
+                    nums[j + 1] = temp;
+                    swapped = true;
+                }
+                
+
+            }
+             if (!swapped) break;
+        }
+        return nums;
+        
+    }
+}
+
+
+
+--- Left and Right Pointers ---
+class Solution {
+    public int[] sortedSquares(int[] nums) {
+        int left = 0;
+        int right = nums.length - 1;
+        int[] result = new int[nums.length];
+        int index = result.length - 1;
+        while(left <= right){
+            int numL = nums[left] * nums[left];
+            int numR = nums[right] * nums[right];
+            if(numR > numL){
+                result[index] = numR;
+                right--;
+                index--;
+            }
+            else{
+                result[index] = numL;
+                left++;
+                index--;
+            }
+            
+
+        }
+        return result;
+    }
+}
