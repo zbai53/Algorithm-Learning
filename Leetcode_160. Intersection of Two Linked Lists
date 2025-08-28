@@ -1,0 +1,65 @@
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode(int x) {
+ *         val = x;
+ *         next = null;
+ *     }
+ * }
+ */
+public class Solution {
+    public ListNode getIntersectionNode(ListNode headA, ListNode headB) {
+        ListNode curA = headA;
+        ListNode curB = headB;
+
+        int lenA = 0;
+        int lenB = 0;
+
+        while(curA != null){
+            curA = curA.next;
+            lenA++;
+        }
+        while(curB != null){
+            curB = curB.next;
+            lenB++;
+        }
+
+        curA = headA;
+        curB = headB;
+        if(lenB > lenA){
+            int tmplen = lenA;
+            lenA = lenB;
+            lenB = tmplen;
+
+            ListNode tmpNode = curA;
+            curA = curB;
+            curB = tmpNode;
+
+        }
+
+        int gap = lenA - lenB;
+
+        while(gap > 0){
+            gap--;
+            curA = curA.next;
+        }
+
+        while(curA != null){
+            if(curA == curB){
+                return curA;
+            }
+            curA = curA.next;
+            curB = curB.next;
+        }
+        return null;
+
+    }
+}
+//理解这道题目，注意这里的相交并不是值相等。而是地址，因此在 curA == curB 判断的时候，表示的是两个链表在这个节点之后，所有节点完全重合（共用内存地址）。两个指针指向的是同一个内存节点。一旦进入这个相交点之后，它们后面走的链表路径就一定一样了
+//因为单链表结构，是通过 .next的方式指向下一个，下一个节点是唯一的。一旦两个指针在某个节点相等了，那么下一个的指向也一定是相等。
+
+//值相等和节点相等的区别。
+//如果只判断 curA.val == curB.val（值相等），那么可能出现两个链表都有值为 5 的节点，但它们是不同的对象。
+//如果判断 curA == curB（引用相等），那说明两个指针指向的是同一个内存里的节点，这个才是真正的“相交”。
