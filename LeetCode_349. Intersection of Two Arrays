@@ -1,0 +1,28 @@
+class Solution {
+    public int[] intersection(int[] nums1, int[] nums2) {
+        int[] hash1 = new int[1002];
+        int[] hash2 = new int[1002];
+
+        for(int num:nums1){
+            hash1[num]++;
+        }
+        for(int num:nums2){
+            hash2[num]++;
+        }
+
+        List<Integer> reslist = new ArrayList<>();
+        for(int i = 0; i < 1002; i++){
+            if(hash1[i] > 0 && hash2[i] > 0){
+                reslist.add(i);
+            }
+        }
+
+        int index = 0;
+        int res[] = new int[reslist.size()];
+        for(int num:reslist){
+            res[index++] = num;
+        }
+        return res;
+        
+    }
+}
