@@ -1,0 +1,22 @@
+class Solution:
+    def isAnagram(self, s: str, t: str) -> bool:
+        s_num = len(s)
+        t_num = len(t)
+
+        if s_num != t_num:
+            return False
+
+        
+        count = {}
+
+        for i in s:
+            count[i] = count.get(i, 0) + 1
+        
+        for j in t:
+            count[j] = count.get(j, 0) - 1
+            if j not in count:
+                return False
+            if count[j] < 0:
+                return False
+            
+        return True
