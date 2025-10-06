@@ -1,0 +1,53 @@
+Method 1 Double pointer
+class Solution:
+    def maxSubArray(self, nums: List[int]) -> int:
+        n = len(nums)
+        if n == 0:
+            return
+        
+        if n == 1:
+            return nums[0]
+        
+        fast = 0
+        slow = 0
+        max1 = nums[0]
+        cur = 0
+        while fast < n:
+            cur += nums[fast]
+            
+            if max1 < cur:
+                max1 = cur
+            
+            if cur <= 0:
+                slow = fast + 1
+                # fast += 1
+                cur = 0
+            fast += 1
+        
+        return max1
+            
+
+Method 2
+
+
+class Solution:
+    def maxSubArray(self, nums: List[int]) -> int:
+        n = len(nums)
+        if n == 0:
+            return
+        
+        if n == 1:
+            return nums[0]
+        
+        cur = 0
+        max1 = nums[0]
+
+        for i in range(n):
+            cur = max(nums[i], cur + nums[i])
+            max1 = max(max1, cur)
+        
+        return max1
+
+需要注意的是，要保证max1是从数组的第一个元素开始的，因为这样可以处理数组全是负数的情况
+            
+
