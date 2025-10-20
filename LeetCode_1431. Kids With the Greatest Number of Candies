@@ -1,0 +1,25 @@
+// O(2n)
+
+class Solution:
+    def kidsWithCandies(self, candies: List[int], extraCandies: int) -> List[bool]:
+        maxCandy = 0
+        res = []
+        for i in candies:
+            maxCandy = max(maxCandy, i)
+
+        
+        for j in candies:
+            maxExtra = j + extraCandies
+            if maxExtra >= maxCandy:
+                res.append(True)
+            else:
+                res.append(False)
+        
+        return res
+
+
+// O(n)
+class Solution:
+    def kidsWithCandies(self, candies: List[int], extraCandies: int) -> List[bool]:
+        maxCandy = max(candies)  # 一次 O(n)
+        return [c + extraCandies >= maxCandy for c in candies]  # 一次 O(n)
