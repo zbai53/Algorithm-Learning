@@ -1,0 +1,13 @@
+class Solution:
+    def largestAltitude(self, gain: List[int]) -> int:
+        gain.insert(0, 0)
+        n = len(gain)
+        altitude = 0
+        max_altitude = 0
+
+        for i in gain: //注意这里是需要取list的数值，因此不需要range取长度，直接用gain取值就好了
+            altitude += i
+            max_altitude = max(max_altitude, altitude)
+
+        return max_altitude
+        
