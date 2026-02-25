@@ -1,0 +1,45 @@
+class Solution:
+    def reverseVowels(self, s: str) -> str:
+        vowels = []
+        revowels = []
+        vowel = "aeiouAEIOU"
+        for i in s:
+            if i in vowel:
+                vowels.append(i)
+        
+        vowels.reverse()
+
+        res = []
+
+        for j in s:
+            if j in vowel:
+                res.append(vowels.pop(0))
+            else:
+                res.append(j)
+
+        return ''.join(res)
+
+
+vowels.pop(0) 的时间复杂度是 O(n), 所以上述方法的时间复杂度比较大，存在O(n^2)
+
+
+
+class Solution:
+    def reverseVowels(self, s: str) -> str:
+        vowel = "aeiouAEIOU"
+        vowels = [ch for ch in s if ch in vowel]  # 收集元音
+        res = []
+
+        for ch in s:
+            if ch in vowel:
+                res.append(vowels.pop())  # 从尾部取（等价于反转）
+            else:
+                res.append(ch)
+
+        return ''.join(res)
+
+这个方法相当于，不需要反转元音，在弹出的时候，直接从尾部开始弹，相当于直接reverse了，省去一步反转的过程，而且pop的情况下也更加快速。
+
+
+
+这个x
