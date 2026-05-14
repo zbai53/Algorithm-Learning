@@ -1,0 +1,36 @@
+class Solution:
+    def moveZeroes(self, nums: List[int]) -> None:
+        """
+        Do not return anything, modify nums in-place instead.
+        """
+        n = len(nums)
+        lastNonZero = 0
+        if n == 0:
+            return
+        for i in range(n):
+            if nums[i] != 0:
+                nums[i], nums[lastNonZero] = nums[lastNonZero], nums[i]
+                lastNonZero += 1
+        
+
+class Solution:
+    def moveZeroes(self, nums: List[int]) -> None:
+        """
+        不返回新数组，原地修改 nums
+        """
+        n = len(nums)
+        if n == 0:
+            return
+        
+        # p 指向下一个应该放非零数字的位置
+        p = 0
+
+        # 第一步：遍历所有元素，把非零元素都“往前挪”
+        for i in range(n):
+            if nums[i] != 0:
+                nums[p] = nums[i]
+                p += 1
+        
+        # 第二步：从 p 开始，剩下的位置全部填 0
+        for j in range(p, n):
+            nums[j] = 0
